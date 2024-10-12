@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [name, setName] = useState('');
@@ -18,6 +19,7 @@ const Index = () => {
   const [bankAccount, setBankAccount] = useState('');
   const [ifsc, setIfsc] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   const services = [
     { value: 'follower1', label: '1 Follower', price: 4, maxQuantity: 7 },
@@ -70,9 +72,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
-        <div className="flex items-center justify-center mb-6">
-          <Instagram className="w-12 h-12 text-[#DD2A7B]" />
-          <h1 className="text-3xl font-bold ml-2 text-black">Comico</h1>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <Instagram className="w-12 h-12 text-[#DD2A7B]" />
+            <h1 className="text-3xl font-bold ml-2 text-black">Comico</h1>
+          </div>
+          <Button
+            onClick={() => navigate('/auth')}
+            className="bg-[#DD2A7B] hover:bg-[#F58529]"
+          >
+            Login / Sign Up
+          </Button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
