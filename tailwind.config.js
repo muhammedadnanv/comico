@@ -51,6 +51,11 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        instagram: {
+          orange: '#F58529',
+          pink: '#DD2A7B',
+          purple: '#8134AF',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
