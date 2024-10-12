@@ -1,7 +1,7 @@
 {
-  "name": "Insta Boost Kerala",
-  "short_name": "InstaBoost",
-  "description": "Boost your Instagram profile in Kerala",
+  "name": "Comico - Instagram Boost",
+  "short_name": "Comico",
+  "description": "Boost your Instagram profile with Comico",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#DD2A7B",

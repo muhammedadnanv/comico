@@ -21,9 +21,9 @@ const Index = () => {
 
   const services = [
     { value: 'follower1', label: '1 Follower', price: 4, maxQuantity: 7 },
-    { value: 'likes40', label: '40 Likes', price: 99 },
-    { value: 'followers50', label: '50 Followers', price: 90 },
-    { value: 'followers65', label: '65 Followers', price: 50 },
+    { value: 'likes40', label: '40 Likes', price: 99, maxQuantity: 10 },
+    { value: 'followers50', label: '50 Followers', price: 90, maxQuantity: 5 },
+    { value: 'followers65', label: '65 Followers', price: 50, maxQuantity: 3 },
   ];
 
   const handleServiceChange = (value) => {
@@ -41,7 +41,7 @@ const Index = () => {
   const handleQuantityChange = (e) => {
     const newQuantity = parseInt(e.target.value);
     const selectedService = services.find(s => s.value === service);
-    if (selectedService && newQuantity >= 1 && newQuantity <= (selectedService.maxQuantity || 1)) {
+    if (selectedService && newQuantity >= 1 && newQuantity <= selectedService.maxQuantity) {
       setQuantity(newQuantity);
       setAmount(selectedService.price * newQuantity);
     }
@@ -53,7 +53,7 @@ const Index = () => {
 
     switch (paymentMethod) {
       case 'upi':
-        const upiLink = `upi://pay?pa=adnanmuhammad4393@okicici&pn=Adnan%20Muhammad&am=${amount}.00&cu=INR&tn=Instagram${service}for${instagramId}`;
+        const upiLink = `upi://pay?pa=adnanmuhammad4393@okicici&pn=Adnan%20Muhammad&am=${amount}.00&cu=INR&tn=Comico${service}for${instagramId}`;
         window.location.href = upiLink;
         break;
       case 'debit':
@@ -72,7 +72,7 @@ const Index = () => {
       <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
         <div className="flex items-center justify-center mb-6">
           <Instagram className="w-12 h-12 text-[#DD2A7B]" />
-          <h1 className="text-3xl font-bold ml-2 text-black">Insta Boost Kerala</h1>
+          <h1 className="text-3xl font-bold ml-2 text-black">Comico</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
@@ -108,14 +108,14 @@ const Index = () => {
               ))}
             </SelectContent>
           </Select>
-          {service === 'follower1' && (
+          {service && (
             <Input
               type="number"
               min="1"
-              max="7"
+              max={services.find(s => s.value === service).maxQuantity}
               value={quantity}
               onChange={handleQuantityChange}
-              placeholder="Quantity (1-7)"
+              placeholder={`Quantity (1-${services.find(s => s.value === service).maxQuantity})`}
             />
           )}
           {service && (
