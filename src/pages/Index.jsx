@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, CreditCard, Building } from 'lucide-react';
+import { Instagram, CreditCard, Building, User, Phone, AtSign, Package, DollarSign } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -85,27 +85,39 @@ const Index = () => {
           </Button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <Input
-            type="tel"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-          <Input
-            type="text"
-            placeholder="Instagram ID"
-            value={instagramId}
-            onChange={(e) => setInstagramId(e.target.value)}
-            required
-          />
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="pl-10"
+            />
+          </div>
+          <div className="relative">
+            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              type="tel"
+              placeholder="Phone Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              className="pl-10"
+            />
+          </div>
+          <div className="relative">
+            <AtSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              type="text"
+              placeholder="Instagram ID"
+              value={instagramId}
+              onChange={(e) => setInstagramId(e.target.value)}
+              required
+              className="pl-10"
+            />
+          </div>
           <Select onValueChange={handleServiceChange} required>
             <SelectTrigger>
               <SelectValue placeholder="Select Service" />
@@ -119,17 +131,22 @@ const Index = () => {
             </SelectContent>
           </Select>
           {service && (
-            <Input
-              type="number"
-              min="1"
-              max={services.find(s => s.value === service).maxQuantity}
-              value={quantity}
-              onChange={handleQuantityChange}
-              placeholder={`Quantity (1-${services.find(s => s.value === service).maxQuantity})`}
-            />
+            <div className="relative">
+              <Package className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Input
+                type="number"
+                min="1"
+                max={services.find(s => s.value === service).maxQuantity}
+                value={quantity}
+                onChange={handleQuantityChange}
+                placeholder={`Quantity (1-${services.find(s => s.value === service).maxQuantity})`}
+                className="pl-10"
+              />
+            </div>
           )}
           {service && (
-            <div className="text-center">
+            <div className="text-center flex items-center justify-center">
+              <DollarSign className="mr-2 text-[#DD2A7B]" />
               <p className="text-lg font-semibold">Price: ₹{amount}</p>
             </div>
           )}
@@ -148,30 +165,42 @@ const Index = () => {
             </div>
           </RadioGroup>
           {paymentMethod === 'debit' && (
-            <Input
-              type="text"
-              placeholder="Debit Card Number"
-              value={cardNumber}
-              onChange={(e) => setCardNumber(e.target.value)}
-              required
-            />
+            <div className="relative">
+              <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Input
+                type="text"
+                placeholder="Debit Card Number"
+                value={cardNumber}
+                onChange={(e) => setCardNumber(e.target.value)}
+                required
+                className="pl-10"
+              />
+            </div>
           )}
           {paymentMethod === 'bank' && (
             <>
-              <Input
-                type="text"
-                placeholder="Bank Account Number"
-                value={bankAccount}
-                onChange={(e) => setBankAccount(e.target.value)}
-                required
-              />
-              <Input
-                type="text"
-                placeholder="IFSC Code"
-                value={ifsc}
-                onChange={(e) => setIfsc(e.target.value)}
-                required
-              />
+              <div className="relative">
+                <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Bank Account Number"
+                  value={bankAccount}
+                  onChange={(e) => setBankAccount(e.target.value)}
+                  required
+                  className="pl-10"
+                />
+              </div>
+              <div className="relative">
+                <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="IFSC Code"
+                  value={ifsc}
+                  onChange={(e) => setIfsc(e.target.value)}
+                  required
+                  className="pl-10"
+                />
+              </div>
             </>
           )}
           <Button type="submit" className="w-full bg-[#DD2A7B] hover:bg-[#F58529]">
