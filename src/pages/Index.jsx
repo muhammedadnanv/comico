@@ -17,8 +17,10 @@ const Index = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [bankAccount, setBankAccount] = useState('');
   const [ifsc, setIfsc] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   const services = [
+    { value: 'follower1', label: '1 Follower', price: 4, maxQuantity: 7 },
     { value: 'likes40', label: '40 Likes', price: 99 },
     { value: 'followers50', label: '50 Followers', price: 90 },
     { value: 'followers65', label: '65 Followers', price: 50 },
@@ -27,7 +29,22 @@ const Index = () => {
   const handleServiceChange = (value) => {
     setService(value);
     const selectedService = services.find(s => s.value === value);
-    setAmount(selectedService ? selectedService.price : 0);
+    if (selectedService) {
+      setAmount(selectedService.price);
+      setQuantity(1);
+    } else {
+      setAmount(0);
+      setQuantity(1);
+    }
+  };
+
+  const handleQuantityChange = (e) => {
+    const newQuantity = parseInt(e.target.value);
+    const selectedService = services.find(s => s.value === service);
+    if (selectedService && newQuantity >= 1 && newQuantity <= (selectedService.maxQuantity || 1)) {
+      setQuantity(newQuantity);
+      setAmount(selectedService.price * newQuantity);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -47,7 +64,7 @@ const Index = () => {
         break;
     }
 
-    toast.success(`Payment of ₹${amount} initiated for ${service}. ${paymentDetails}`);
+    toast.success(`Payment of ₹${amount} initiated for ${quantity} ${service}. ${paymentDetails}`);
   };
 
   return (
@@ -91,6 +108,16 @@ const Index = () => {
               ))}
             </SelectContent>
           </Select>
+          {service === 'follower1' && (
+            <Input
+              type="number"
+              min="1"
+              max="7"
+              value={quantity}
+              onChange={handleQuantityChange}
+              placeholder="Quantity (1-7)"
+            />
+          )}
           {service && (
             <div className="text-center">
               <p className="text-lg font-semibold">Price: ₹{amount}</p>
