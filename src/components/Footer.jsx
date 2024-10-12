@@ -12,7 +12,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center">
             <Github className="w-5 h-5 mr-2 text-[#DD2A7B]" />
-            <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <a href="https://github.com/muhammedadnanv" target="_blank" rel="noopener noreferrer" className="hover:underline">
               Connect with us on GitHub
             </a>
           </div>
